@@ -7,3 +7,6 @@ InsurgencySandstormRcon/conn.cs
 InsurgencySandstormRcon/bin/Debug/InsurgencySandstormRcon.exe.config
 *.dll
 InsurgencySandstormRcon/bin/Debug/Newtonsoft.Json.xml
+InsurgencySandstormRcon/.vs
+InsurgencySandstormRcon/packages
+InsurgencySandstormRcon/UpgradeLog.htm
