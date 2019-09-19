@@ -2,3 +2,8 @@
 InsurgencySandstormRcon/Resources/RconServers.json
 InsurgencySandstormRcon/obj/Debug
 InsurgencySandstormRcon/conn.cs
+*.pdb
+*.exe
+InsurgencySandstormRcon/bin/Debug/InsurgencySandstormRcon.exe.config
+*.dll
+InsurgencySandstormRcon/bin/Debug/Newtonsoft.Json.xml
