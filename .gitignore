@@ -22,3 +22,8 @@ packages/Newtonsoft.Json.12.0.2/lib/net40/Newtonsoft.Json.xml
 packages/Newtonsoft.Json.12.0.2/lib/net35/Newtonsoft.Json.xml
 packages/Newtonsoft.Json.12.0.2/lib/net20/Newtonsoft.Json.xml
 packages/Newtonsoft.Json.12.0.2/.signature.p7s
+.vs/InsurgencySandstormRcon/v15/.suo
+.vs/InsurgencySandstormRcon/v15/Server/sqlite3/db.lock
+.vs/InsurgencySandstormRcon/v15/Server/sqlite3/storage.ide
+.vs/InsurgencySandstormRcon/v15/Server/sqlite3/storage.ide-shm
+.vs/InsurgencySandstormRcon/v15/Server/sqlite3/storage.ide-wal
