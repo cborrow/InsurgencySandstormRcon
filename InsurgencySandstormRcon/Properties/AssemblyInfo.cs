@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("InsurgencySandstormRcon")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Insurgency Sandstorm Rcon")]
+[assembly: AssemblyDescription("An remote console / managment tool for Insurgency Sandstorm and other game servers that use the Source Rcon protocol")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Cory Borrow")]
 [assembly: AssemblyProduct("InsurgencySandstormRcon")]
-[assembly: AssemblyCopyright("Copyright ©  2019")]
+[assembly: AssemblyCopyright("Copyright © Cory Borrow  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
