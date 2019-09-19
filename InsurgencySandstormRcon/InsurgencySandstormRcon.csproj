@@ -56,7 +56,6 @@
     <Compile Include="Dialogs\BanListDialog.Designer.cs">
       <DependentUpon>BanListDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="conn.cs" />
     <Compile Include="Dialogs\BanPlayersDialog.cs">
       <SubType>Form</SubType>
     </Compile>
