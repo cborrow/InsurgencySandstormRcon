@@ -86,27 +86,6 @@ namespace InsurgencySandstormRcon
                     }
                 }
 
-                //Players are listed in a single like rather than line by line.
-                //TODO : Fix the player list, because of this.
-
-                /*foreach(string line in lines)
-                {
-                    string[] parts = line.Split('|');
-                    if (parts[0].Trim() == "0" || parts[0].Trim() == "ID")
-                        continue;
-                    else
-                    {
-                        if (parts.Length >= 4)
-                        {
-                            ListViewItem lvi = new ListViewItem();
-                            lvi.Text = parts[1].Trim();
-                            lvi.SubItems.Add(parts[4].Trim());
-                            lvi.Tag = parts[2].Trim();
-                            listView1.Items.Add(lvi);
-                        }
-                    }
-                }*/
-
                 if(listView1.Items.Count == 0)
                 {
                     ListViewItem lvi = new ListViewItem();
@@ -248,7 +227,6 @@ namespace InsurgencySandstormRcon
             else
             {
                 rconManager.ActiveServer = (RconServer)menuItem.Tag;
-                //selectedServer = (RconServer)menuItem.Tag;
                 ((ToolStripMenuItem)menuItem).Checked = true;
                 //TODO : Grab some data and run the inital lookup of server info, etc
             }
@@ -335,7 +313,7 @@ namespace InsurgencySandstormRcon
         {
             if(serverManagmentDialog.ShowDialog() == DialogResult.OK)
             {
-                //The server management dialog should have taking care of saving the file.
+                //The server management dialog should have taking care of adding / removing servers from the server list
                 //We just need to reload the servers from the server list.
 
                 UnselectAllServers();
@@ -374,28 +352,31 @@ namespace InsurgencySandstormRcon
             }
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void button6_Click(object sender, EventArgs e
         {
-            string data = rconManager.ActiveServer.Rcon.SendCommand("scenarios");
-            string[] scenarioList = data.Split('\n');
-
-            for(int i = 0; i < scenarioList.Length; i++)
+            if (rconManager.ActiveServer != null)
             {
-                int start = scenarioList[i].IndexOf("(");
-                int end = scenarioList[i].IndexOf(")");
-                int length = (end - start);
+                string data = rconManager.ActiveServer.Rcon.SendCommand("scenarios");
+                string[] scenarioList = data.Split('\n');
 
-                if (start >= 0 && end > start)
+                for (int i = 0; i < scenarioList.Length; i++)
                 {
-                    scenarioList[i] = scenarioList[i].Remove(start, length + 1).Trim();
-                }
-            }
+                    int start = scenarioList[i].IndexOf("(");
+                    int end = scenarioList[i].IndexOf(")");
+                    int length = (end - start);
 
-            if(scenarioListDialog.ShowDialog(scenarioList) == DialogResult.OK)
-            {
-                string scenario = scenarioListDialog.SelectedScenario;
-                string output = rconManager.ActiveServer.Rcon.SendCommand("travelscenario " + scenario);
-                AddMessageToConsole(output);
+                    if (start >= 0 && end > start)
+                    {
+                        scenarioList[i] = scenarioList[i].Remove(start, length + 1).Trim();
+                    }
+                }
+
+                if (scenarioListDialog.ShowDialog(scenarioList) == DialogResult.OK)
+                {
+                    string scenario = scenarioListDialog.SelectedScenario;
+                    string output = rconManager.ActiveServer.Rcon.SendCommand("travelscenario " + scenario);
+                    AddMessageToConsole(output);
+                }
             }
         }
 
@@ -436,26 +417,40 @@ namespace InsurgencySandstormRcon
         private void button7_Click(object sender, EventArgs e)
         {
             //Restart round
-            DialogResult dr = MessageBox.Show("Would you like to swap teams when restarting round?", 
-                "Restart round", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            if (rconManager.ActiveServer != null)
+            {
+                DialogResult dr = MessageBox.Show("Would you like to swap teams when restarting round?",
+                    "Restart round", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
-            if(dr == DialogResult.Yes)
-            {
-                rconManager.ActiveServer.Rcon.SendCommand("restartround 1");
-                MessageBox.Show("Restarting the round");
+                if (dr == DialogResult.Yes)
+                {
+                    rconManager.ActiveServer.Rcon.SendCommand("restartround 1");
+                    MessageBox.Show("Restarting the round");
+                }
+                else if (dr == DialogResult.No)
+                {
+                    rconManager.ActiveServer.Rcon.SendCommand("restartround 0");
+                    MessageBox.Show("Restarting the round and swapping teams");
+                }
             }
-            else if(dr == DialogResult.No)
+            else
             {
-                rconManager.ActiveServer.Rcon.SendCommand("restartround 0");
-                MessageBox.Show("Restarting the round and swapping teams");
+                MessageBox.Show("No server is currenly selected / active");
             }
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            string text = textBox1.Text;
-            string formattedText = Encoding.ASCII.GetString(Encoding.ASCII.GetBytes(text));
-            rconManager.ActiveServer.Rcon.SendCommand("say " + formattedText);
+            if (rconManager.ActiveServer != null)
+            {
+                string text = textBox1.Text;
+                string formattedText = Encoding.ASCII.GetString(Encoding.ASCII.GetBytes(text));
+                rconManager.ActiveServer.Rcon.SendCommand("say " + formattedText);
+            }
+            else
+            {
+                MessageBox.Show("No server is currently selected / active");
+            }
         }
     }
 }
