@@ -28,6 +28,17 @@ namespace InsurgencySandstormRcon
 
         Timer autoUpdateTimer;
 
+        public bool AutoUpdateEnabled
+        {
+            get { return checkBox1.Checked; }
+            set
+            {
+                checkBox1.Checked = value;
+                if (checkBox1.Checked == true)
+                    autoUpdateTimer.Start();
+            }
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -119,7 +130,7 @@ namespace InsurgencySandstormRcon
             }
         }
 
-        protected string ParseScenarioString(string input)
+        public string ParseScenarioString(string input)
         {
             Regex regex = new Regex("(.Scenario_[A-Za-z_]+')");
 
@@ -305,8 +316,9 @@ namespace InsurgencySandstormRcon
             int updateFreq = (int)numericUpDown1.Value;
             autoUpdateTimer.Stop();
             autoUpdateTimer.Interval = (updateFreq * 1000);
-            autoUpdateTimer.Start();
-            
+
+            if(AutoUpdateEnabled)
+                autoUpdateTimer.Start();
         }
 
         private void manageConnectionsToolStripMenuItem_Click(object sender, EventArgs e)
