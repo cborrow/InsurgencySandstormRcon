@@ -10,3 +10,15 @@ InsurgencySandstormRcon/bin/Debug/Newtonsoft.Json.xml
 InsurgencySandstormRcon/.vs
 InsurgencySandstormRcon/packages
 InsurgencySandstormRcon/UpgradeLog.htm
+packages/Newtonsoft.Json.12.0.2/Newtonsoft.Json.12.0.2.nupkg
+packages/Newtonsoft.Json.12.0.2/LICENSE.md
+packages/Newtonsoft.Json.12.0.2/lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.xml
+packages/Newtonsoft.Json.12.0.2/lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.xml
+packages/Newtonsoft.Json.12.0.2/lib/netstandard2.0/Newtonsoft.Json.xml
+packages/Newtonsoft.Json.12.0.2/lib/netstandard1.3/Newtonsoft.Json.xml
+packages/Newtonsoft.Json.12.0.2/lib/netstandard1.0/Newtonsoft.Json.xml
+packages/Newtonsoft.Json.12.0.2/lib/net45/Newtonsoft.Json.xml
+packages/Newtonsoft.Json.12.0.2/lib/net40/Newtonsoft.Json.xml
+packages/Newtonsoft.Json.12.0.2/lib/net35/Newtonsoft.Json.xml
+packages/Newtonsoft.Json.12.0.2/lib/net20/Newtonsoft.Json.xml
+packages/Newtonsoft.Json.12.0.2/.signature.p7s
