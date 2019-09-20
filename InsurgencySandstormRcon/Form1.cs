@@ -23,7 +23,6 @@ namespace InsurgencySandstormRcon
         BanPlayersDialog banPlayersDialog;
 
         RconServerManager rconManager;
-        RconServer selectedServer = null;
         RconPacketLog rconDebug = new RconPacketLog();
 
         Timer autoUpdateTimer;
@@ -164,7 +163,6 @@ namespace InsurgencySandstormRcon
 
         public void UnselectAllServers()
         {
-            selectedServer = null;
             rconManager.ActiveServer = null;
 
             foreach (ToolStripItem item in toolStripDropDownButton1.DropDownItems)
@@ -299,7 +297,6 @@ namespace InsurgencySandstormRcon
                     else
                         lvi.SubItems.Add("SERVERDATA_VALUE_CONT");
                 }
-                //lvi.SubItems.Add(packet.Type.ToString());
                 lvi.SubItems.Add(packet.Data);
 
                 listView2.Items.Add(lvi);
@@ -335,7 +332,8 @@ namespace InsurgencySandstormRcon
 
         private void button3_Click(object sender, EventArgs e)
         {
-            
+            //View player ban list
+            banListDialog.ShowDialog();
         }
 
         private void button4_Click(object sender, EventArgs e)
