@@ -66,9 +66,20 @@ namespace InsurgencySandstormRcon
             GetCurrentScenario();
         }
 
+        public bool CheckServerConnection()
+        {
+            if (rconManager.ActiveServer == null)
+            {
+                MessageBox.Show("No server is currently selected and / or active");
+                return false;
+            }
+            else
+                return true;
+        }
+
         public void GetPlayerList()
         {
-            if(rconManager.ActiveServer != null)
+            if(CheckServerConnection())
             {
                 listView1.Items.Clear();
                 string data = rconManager.ActiveServer.Rcon.SendCommand("listplayers");
@@ -103,17 +114,11 @@ namespace InsurgencySandstormRcon
                     listView1.Items.Add(lvi);
                 }
             }
-            else
-            {
-                ListViewItem lvi = new ListViewItem();
-                lvi.Text = "No servers are currently selected. Please select one";
-                listView1.Items.Add(lvi);
-            }
         }
 
         public void GetCurrentScenario()
         {
-            if(rconManager.ActiveServer != null)
+            if(CheckServerConnection())
             {
                 string data = rconManager.ActiveServer.Rcon.SendCommand("listgamemodeproperties scenario");
                 string[] lines = data.Split('\n');
@@ -252,7 +257,7 @@ namespace InsurgencySandstormRcon
             {
                 string cmd = textBox3.Text;
                 Console.WriteLine("Sending command {0}", cmd);
-                if(rconManager.ActiveServer != null)
+                if(CheckServerConnection())
                 {
                     //TODO : Setup allowed command whitelist to check commands against
                     string output = rconManager.ActiveServer.Rcon.SendCommand(cmd);
@@ -338,7 +343,7 @@ namespace InsurgencySandstormRcon
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (rconManager.ActiveServer != null)
+            if (CheckServerConnection())
             {
                 string data = rconManager.ActiveServer.Rcon.SendCommand("maps");
                 string[] maps = data.Split('\n');
@@ -349,7 +354,7 @@ namespace InsurgencySandstormRcon
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if (rconManager.ActiveServer != null)
+            if (CheckServerConnection())
             {
                 string data = rconManager.ActiveServer.Rcon.SendCommand("maps");
                 string[] maps = data.Split('\n');
@@ -364,7 +369,7 @@ namespace InsurgencySandstormRcon
 
         private void button6_Click(object sender, EventArgs e)
         {
-            if (rconManager.ActiveServer != null)
+            if (CheckServerConnection())
             {
                 string data = rconManager.ActiveServer.Rcon.SendCommand("scenarios");
                 string[] scenarioList = data.Split('\n');
@@ -392,7 +397,7 @@ namespace InsurgencySandstormRcon
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //Ban player
+            //Ban player(s)
             ListView.SelectedListViewItemCollection selectedItems = listView1.SelectedItems;
             ListViewItem[] items = new ListViewItem[selectedItems.Count];
 
@@ -409,7 +414,7 @@ namespace InsurgencySandstormRcon
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //Kick player
+            //Kick player(s)
             ListView.SelectedListViewItemCollection selectedItems = listView1.SelectedItems;
             ListViewItem[] items = new ListViewItem[selectedItems.Count];
 
@@ -427,7 +432,7 @@ namespace InsurgencySandstormRcon
         private void button7_Click(object sender, EventArgs e)
         {
             //Restart round
-            if (rconManager.ActiveServer != null)
+            if (CheckServerConnection())
             {
                 DialogResult dr = MessageBox.Show("Would you like to swap teams when restarting round?",
                     "Restart round", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
@@ -443,23 +448,15 @@ namespace InsurgencySandstormRcon
                     MessageBox.Show("Restarting the round and swapping teams");
                 }
             }
-            else
-            {
-                MessageBox.Show("No server is currenly selected / active");
-            }
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            if (rconManager.ActiveServer != null)
+            if (CheckServerConnection())
             {
                 string text = textBox1.Text;
                 string formattedText = Encoding.ASCII.GetString(Encoding.ASCII.GetBytes(text));
                 rconManager.ActiveServer.Rcon.SendCommand("say " + formattedText);
-            }
-            else
-            {
-                MessageBox.Show("No server is currently selected / active");
             }
         }
     }
