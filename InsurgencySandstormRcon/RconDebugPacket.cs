@@ -60,5 +60,37 @@ namespace InsurgencySandstormRcon
         {
 
         }
+
+        public string DirectionToString()
+        {
+            if (direction == PacketDirection.Received)
+                return "Received";
+            else if (direction == PacketDirection.Sent)
+                return "Sent";
+            return "Unknown";
+        }
+
+        public string TypeToString()
+        {
+            if (direction == PacketDirection.Sent)
+            {
+                if (type == 0x03)
+                    return "SERVERDATA_AUTH";
+                else if (type == 0x02)
+                    return "SERVERDATA_EXECCOMMAND";
+                else if (type == 0x00)
+                    return "SERVERDATA_EMPTY_PACKET";
+            }
+            else
+            {
+                if (type == 0x02)
+                    return "SERVERDATA_AUTH_RESPONSE";
+                else if (type == 0x00)
+                    return "SERVERDATA_RESPONSE_VALUE";
+                else
+                    return "SERVERDATA_VALUE_CONT";
+            }
+            return "Unknown";
+        }
     }
 }
