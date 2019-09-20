@@ -80,6 +80,12 @@
     <Compile Include="Dialogs\BanPlayersDialog.Designer.cs">
       <DependentUpon>BanPlayersDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\DebugPacketDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\DebugPacketDialog.Designer.cs">
+      <DependentUpon>DebugPacketDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\KickPlayersDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,6 +135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\BanPlayersDialog.resx">
       <DependentUpon>BanPlayersDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\DebugPacketDialog.resx">
+      <DependentUpon>DebugPacketDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\KickPlayersDialog.resx">
       <DependentUpon>KickPlayersDialog.cs</DependentUpon>
