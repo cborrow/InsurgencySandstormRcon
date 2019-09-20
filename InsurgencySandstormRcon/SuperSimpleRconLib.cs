@@ -314,6 +314,7 @@ namespace InsurgencySandstormRcon
         {
             //Instead of using packet length go by where packet data should start to the length - packet header - 1 for null-terminated string
             //Some multi-part packets do not include the total length of all of the packets and rather the length of the first complete packet
+            //However, that also requires that we filter out null terminators / empty bytes
             //string data = UTF8Encoding.ASCII.GetString(packet, 12, packet.Length - 13);
             string data = string.Empty;
 
@@ -329,8 +330,8 @@ namespace InsurgencySandstormRcon
                 data = Encoding.UTF8.GetString(packet, 0, packet.Length - 1);
 
             //Filter out null terminators and the empty end of the packet
-            data = data.Replace('\0', '*');
-            data = data.Replace("*", string.Empty);
+            data = data.Replace('\0', '^');
+            data = data.Replace("^", string.Empty);
 
             return data;
         }
