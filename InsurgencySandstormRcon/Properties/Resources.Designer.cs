@@ -59,15 +59,5 @@ namespace InsurgencySandstormRcon.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] RconServers {
-            get {
-                object obj = ResourceManager.GetObject("RconServers", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
     }
 }
