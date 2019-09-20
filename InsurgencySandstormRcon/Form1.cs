@@ -206,38 +206,6 @@ namespace InsurgencySandstormRcon
             }
         }
 
-        protected string DirectionToString(PacketDirection dir)
-        {
-            if (dir == PacketDirection.Received)
-                return "Received";
-            else if (dir == PacketDirection.Sent)
-                return "Sent";
-            return "Unknown";
-        }
-
-        protected string TypeToString(PacketDirection dir, int messageType)
-        {
-            if (dir == PacketDirection.Sent)
-            {
-                if (messageType == 0x03)
-                    return "SERVERDATA_AUTH";
-                else if (messageType == 0x02)
-                    return "SERVERDATA_EXECCOMMAND";
-                else if (messageType == 0x00)
-                    return "SERVERDATA_EMPTY_PACKET";
-            }
-            else
-            {
-                if (messageType == 0x02)
-                    return "SERVERDATA_AUTH_RESPONSE";
-                else if (messageType == 0x00)
-                    return "SERVERDATA_RESPONSE_VALUE";
-                else
-                    return "SERVERDATA_VALUE_CONT";
-            }
-            return "Unknown";
-        }
-
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
