@@ -21,6 +21,7 @@ namespace InsurgencySandstormRcon
         BanListDialog banListDialog;
         KickPlayersDialog kickPlayersDialog;
         BanPlayersDialog banPlayersDialog;
+        DebugPacketDialog debugPacketDialog;
 
         RconServerManager rconManager;
         RconPacketLog rconDebug = new RconPacketLog();
@@ -58,6 +59,7 @@ namespace InsurgencySandstormRcon
             banListDialog = new BanListDialog();
             kickPlayersDialog = new KickPlayersDialog();
             banPlayersDialog = new BanPlayersDialog();
+            debugPacketDialog = new DebugPacketDialog();
         }
 
         public void UpdateServerInfo()
@@ -169,6 +171,7 @@ namespace InsurgencySandstormRcon
         public void UnselectAllServers()
         {
             rconManager.ActiveServer = null;
+            this.Text = "Insurgency Sandstorm rcon";
 
             foreach (ToolStripItem item in toolStripDropDownButton1.DropDownItems)
             {
@@ -201,6 +204,38 @@ namespace InsurgencySandstormRcon
                 menuItem.Tag = server;
                 toolStripDropDownButton1.DropDownItems.Add(menuItem);
             }
+        }
+
+        protected string DirectionToString(PacketDirection dir)
+        {
+            if (dir == PacketDirection.Received)
+                return "Received";
+            else if (dir == PacketDirection.Sent)
+                return "Sent";
+            return "Unknown";
+        }
+
+        protected string TypeToString(PacketDirection dir, int messageType)
+        {
+            if (dir == PacketDirection.Sent)
+            {
+                if (messageType == 0x03)
+                    return "SERVERDATA_AUTH";
+                else if (messageType == 0x02)
+                    return "SERVERDATA_EXECCOMMAND";
+                else if (messageType == 0x00)
+                    return "SERVERDATA_EMPTY_PACKET";
+            }
+            else
+            {
+                if (messageType == 0x02)
+                    return "SERVERDATA_AUTH_RESPONSE";
+                else if (messageType == 0x00)
+                    return "SERVERDATA_RESPONSE_VALUE";
+                else
+                    return "SERVERDATA_VALUE_CONT";
+            }
+            return "Unknown";
         }
 
         protected override void OnLoad(EventArgs e)
@@ -242,6 +277,7 @@ namespace InsurgencySandstormRcon
             {
                 rconManager.ActiveServer = (RconServer)menuItem.Tag;
                 ((ToolStripMenuItem)menuItem).Checked = true;
+                this.Text = "Insurgency Sandstorm rcon [" + rconManager.ActiveServer.Name + "]";
                 //TODO : Grab some data and run the inital lookup of server info, etc
             }
         }
@@ -276,32 +312,11 @@ namespace InsurgencySandstormRcon
             {
                 ListViewItem lvi = new ListViewItem();
 
-                if (packet.Direction == PacketDirection.Sent)
-                    lvi.Text = "Sent";
-                else
-                    lvi.Text = "Received";
+                lvi.Text = packet.DirectionToString();
 
                 lvi.SubItems.Add(packet.Size.ToString());
                 lvi.SubItems.Add(packet.Id.ToString());
-
-                if(packet.Direction == PacketDirection.Sent)
-                {
-                    if (packet.Type == 0x03)
-                        lvi.SubItems.Add("SERVERDATA_AUTH");
-                    else if (packet.Type == 0x02)
-                        lvi.SubItems.Add("SERVERDATA_EXECCOMMAND");
-                    else if (packet.Type == 0x00)
-                        lvi.SubItems.Add("SERVERDATA_EMPTY_PACKET");
-                }
-                else
-                {
-                    if (packet.Type == 0x02)
-                        lvi.SubItems.Add("SERVERDATA_AUTH_RESPONSE");
-                    else if (packet.Type == 0x00)
-                        lvi.SubItems.Add("SERVERDATA_RESPONSE_VALUE");
-                    else
-                        lvi.SubItems.Add("SERVERDATA_VALUE_CONT");
-                }
+                lvi.SubItems.Add(packet.TypeToString());
                 lvi.SubItems.Add(packet.Data);
 
                 listView2.Items.Add(lvi);
@@ -457,6 +472,19 @@ namespace InsurgencySandstormRcon
                 string text = textBox1.Text;
                 string formattedText = Encoding.ASCII.GetString(Encoding.ASCII.GetBytes(text));
                 rconManager.ActiveServer.Rcon.SendCommand("say " + formattedText);
+            }
+        }
+
+        private void listView2_ItemActivate(object sender, EventArgs e)
+        {
+            if (listView2.SelectedItems.Count > 0)
+            {
+                int index = listView2.SelectedIndices[0];
+                if (index >= 0 && index < RconPacketLog.Instance.Packets.Count)
+                {
+                    RconDebugPacket debugPacket = RconPacketLog.Instance.Packets[index];
+                    debugPacketDialog.ShowDialog(debugPacket);
+                }
             }
         }
     }
