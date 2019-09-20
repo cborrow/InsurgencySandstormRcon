@@ -46,7 +46,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -101,19 +100,20 @@
             this.toolStripDropDownButton1.Size = new System.Drawing.Size(65, 22);
             this.toolStripDropDownButton1.Text = "Connect";
             this.toolStripDropDownButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripDropDownButton1.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ToolStripDropDownButton1_DropDownItemClicked);
             this.toolStripDropDownButton1.Click += new System.EventHandler(this.toolStripDropDownButton1_Click);
             // 
             // manageConnectionsToolStripMenuItem
             // 
             this.manageConnectionsToolStripMenuItem.Name = "manageConnectionsToolStripMenuItem";
-            this.manageConnectionsToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.manageConnectionsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.manageConnectionsToolStripMenuItem.Text = "Manage Servers";
             this.manageConnectionsToolStripMenuItem.Click += new System.EventHandler(this.manageConnectionsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(154, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // toolStripSeparator2
             // 
@@ -144,7 +144,6 @@
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.button7);
             this.tabPage1.Controls.Add(this.button6);
-            this.tabPage1.Controls.Add(this.button5);
             this.tabPage1.Controls.Add(this.button4);
             this.tabPage1.Controls.Add(this.pictureBox1);
             this.tabPage1.Controls.Add(this.label2);
@@ -276,18 +275,6 @@
             this.button6.Text = "Change Scenario";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // button5
-            // 
-            this.button5.Enabled = false;
-            this.button5.Location = new System.Drawing.Point(550, 186);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(96, 23);
-            this.button5.TabIndex = 8;
-            this.button5.Text = "Change Map";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Visible = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button4
             // 
@@ -541,7 +528,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;

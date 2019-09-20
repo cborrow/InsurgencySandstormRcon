@@ -44,9 +44,7 @@ namespace InsurgencySandstormRcon
             InitializeComponent();
 
             rconManager = new RconServerManager();
-            //rconManager.Test();
             rconManager.Load();
-            toolStripDropDownButton1.DropDownItemClicked += ToolStripDropDownButton1_DropDownItemClicked;
 
             autoUpdateTimer = new Timer();
             autoUpdateTimer.Interval = 30000;
@@ -310,9 +308,6 @@ namespace InsurgencySandstormRcon
         {
             if(serverManagmentDialog.ShowDialog() == DialogResult.OK)
             {
-                //The server management dialog should have taking care of adding / removing servers from the server list
-                //We just need to reload the servers from the server list.
-
                 UnselectAllServers();
                 ReloadServers();
             }
@@ -332,21 +327,6 @@ namespace InsurgencySandstormRcon
                 string[] maps = data.Split('\n');
 
                 mapListDialog.ShowDialog(maps, false);
-            }
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            if (CheckServerConnection())
-            {
-                string data = rconManager.ActiveServer.Rcon.SendCommand("maps");
-                string[] maps = data.Split('\n');
-
-                if(mapListDialog.ShowDialog(maps, true) == DialogResult.OK)
-                {
-                    string map = mapListDialog.SelectedMap;
-                    //rconManager.ActiveServer.Rcon.SendCommand("travel " + map);
-                }
             }
         }
 
