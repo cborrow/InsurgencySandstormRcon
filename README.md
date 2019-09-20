@@ -1,6 +1,8 @@
 # InsurgencySandstormRcon
-Rcon Client for Insurgency Sandstorm as well as others
+A simple rcon client for Insurgency Sandstorm servers.
 
-Simple to use tool for interactining with the Source rcon protocol of a Insurgency Sandstorm server.
+Supports using Source rcon protocol, can connect to any rcon server that supports the Source rcon protcol can can send
+the requests using the console.
 
-The console also gives the ability to send commands to any other server that supports the Source rcon protocol.
+For Insurgency Sandstorm the first tab has features to enable viewing current players, the current scenario, ban list.
+As well as kicking or banning players, viewing maps, send a message.
