@@ -20,16 +20,6 @@ namespace InsurgencySandstormRcon
             InitializeComponent();
         }
 
-        public void LoadRconServerFile()
-        {
-
-        }
-
-        public void SaveRconServerFile()
-        {
-
-        }
-
         protected override void OnLoad(EventArgs e)
         {
             listBox1.Items.Clear();
@@ -85,6 +75,8 @@ namespace InsurgencySandstormRcon
                 listBox1.Items.Add(server);
                 RconServerManager.Instance.Servers.Add(server);
             }
+
+            RconServerManager.Instance.Save();
         }
 
         private void button2_Click(object sender, EventArgs e)
