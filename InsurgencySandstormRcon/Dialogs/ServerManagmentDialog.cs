@@ -77,6 +77,8 @@ namespace InsurgencySandstormRcon
             }
 
             RconServerManager.Instance.Save();
+            DialogResult = DialogResult.OK;
+            this.Close();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -89,6 +91,9 @@ namespace InsurgencySandstormRcon
             numericUpDown2.Value = 0;
             numericUpDown3.Value = 0;
             textBox6.Text = string.Empty;
+
+            DialogResult = DialogResult.Cancel;
+            this.Close();
         }
 
         private void button3_Click(object sender, EventArgs e)
