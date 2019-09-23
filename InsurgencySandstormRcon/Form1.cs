@@ -74,7 +74,18 @@ namespace InsurgencySandstormRcon
                 return false;
             }
             else
-                return true;
+            {
+                try
+                {
+                    string status = rconManager.ActiveServer.Rcon.SendCommand("status");
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("The server has lost connection. You can try to reconnect but the server may be offline");
+                }
+                return false;
+            }
         }
 
         public void GetPlayerList()
