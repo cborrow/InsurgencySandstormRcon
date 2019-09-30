@@ -435,5 +435,17 @@ namespace InsurgencySandstormRcon
                 }
             }
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            int minEnemies = (int)minimumEnemies.Value;
+            int maxEnemies = (int)maximumEnemies.Value;
+
+            if(CheckServerConnection())
+            {
+                rconManager.ActiveServer.Rcon.SendCommand("gamemodeproperty MinimumEnemies " + minEnemies.ToString());
+                rconManager.ActiveServer.Rcon.SendCommand("gamemodeproperty MaximumEnemies " + maxEnemies.ToString());
+            }
+        }
     }
 }

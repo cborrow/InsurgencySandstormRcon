@@ -68,6 +68,13 @@
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.label5 = new System.Windows.Forms.Label();
+            this.minimumEnemies = new System.Windows.Forms.NumericUpDown();
+            this.maximumEnemies = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -75,6 +82,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.minimumEnemies)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maximumEnemies)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -106,14 +116,14 @@
             // manageConnectionsToolStripMenuItem
             // 
             this.manageConnectionsToolStripMenuItem.Name = "manageConnectionsToolStripMenuItem";
-            this.manageConnectionsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.manageConnectionsToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.manageConnectionsToolStripMenuItem.Text = "Manage Servers";
             this.manageConnectionsToolStripMenuItem.Click += new System.EventHandler(this.manageConnectionsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(154, 6);
             // 
             // toolStripSeparator2
             // 
@@ -123,6 +133,7 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -485,6 +496,95 @@
             this.columnHeader8.Text = "Body";
             this.columnHeader8.Width = 1587;
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.label7);
+            this.tabPage4.Controls.Add(this.button5);
+            this.tabPage4.Controls.Add(this.maximumEnemies);
+            this.tabPage4.Controls.Add(this.label6);
+            this.tabPage4.Controls.Add(this.minimumEnemies);
+            this.tabPage4.Controls.Add(this.label5);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(656, 370);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Scenario Settings";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(8, 9);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(91, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Minimum Enemies";
+            // 
+            // minimumEnemies
+            // 
+            this.minimumEnemies.Location = new System.Drawing.Point(11, 25);
+            this.minimumEnemies.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.minimumEnemies.Name = "minimumEnemies";
+            this.minimumEnemies.Size = new System.Drawing.Size(120, 20);
+            this.minimumEnemies.TabIndex = 1;
+            this.minimumEnemies.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // maximumEnemies
+            // 
+            this.maximumEnemies.Location = new System.Drawing.Point(11, 73);
+            this.maximumEnemies.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.maximumEnemies.Name = "maximumEnemies";
+            this.maximumEnemies.Size = new System.Drawing.Size(120, 20);
+            this.maximumEnemies.TabIndex = 3;
+            this.maximumEnemies.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(8, 57);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(94, 13);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "Maximum Enemies";
+            // 
+            // button5
+            // 
+            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button5.Location = new System.Drawing.Point(11, 339);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(120, 23);
+            this.button5.TabIndex = 4;
+            this.button5.Text = "Send Settings";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // label7
+            // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(8, 323);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(433, 13);
+            this.label7.TabIndex = 5;
+            this.label7.Text = "Note these settings are reset to what is in the Game.ini file each time the scena" +
+    "rio changes";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -504,6 +604,10 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.minimumEnemies)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maximumEnemies)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -550,6 +654,13 @@
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.NumericUpDown maximumEnemies;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown minimumEnemies;
+        private System.Windows.Forms.Label label5;
     }
 }
 
