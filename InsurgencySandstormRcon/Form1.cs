@@ -68,12 +68,7 @@ namespace InsurgencySandstormRcon
 
         public bool CheckServerConnection()
         {
-            if (rconManager.ActiveServer == null)
-            {
-                MessageBox.Show("No server is currently selected and / or active");
-                return false;
-            }
-            else
+            if (rconManager.ActiveServer != null)
             {
                 try
                 {
@@ -84,8 +79,8 @@ namespace InsurgencySandstormRcon
                 {
                     MessageBox.Show("The server has lost connection. You can try to reconnect but the server may be offline");
                 }
-                return false;
             }
+            return false;
         }
 
         public void GetPlayerList()
@@ -302,7 +297,10 @@ namespace InsurgencySandstormRcon
 
         private void button11_Click(object sender, EventArgs e)
         {
-            UpdateServerInfo();
+            if (rconManager.ActiveServer == null)
+                MessageBox.Show("There are currently no selected / active servers. Please select one to get updated information");
+            else
+                UpdateServerInfo();
         }
 
         private void button12_Click(object sender, EventArgs e)
