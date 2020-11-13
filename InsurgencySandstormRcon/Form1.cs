@@ -77,6 +77,7 @@ namespace InsurgencySandstormRcon
                 }
                 catch (Exception ex)
                 {
+                    AddMessageToConsole(ex.Message);
                     MessageBox.Show("The server has lost connection. You can try to reconnect but the server may be offline");
                 }
             }
