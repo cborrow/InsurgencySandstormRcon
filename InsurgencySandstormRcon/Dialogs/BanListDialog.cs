@@ -12,9 +12,13 @@ namespace InsurgencySandstormRcon
 {
     public partial class BanListDialog : Form
     {
+        SimpleSteam simpleSteam;
+
         public BanListDialog()
         {
             InitializeComponent();
+
+            simpleSteam = new SimpleSteam();
         }
 
         protected override void OnLoad(EventArgs e)
@@ -42,9 +46,12 @@ namespace InsurgencySandstormRcon
 
                 if (parts.Length > 1 && banEntry.Contains("("))
                 {
-                    string user = parts[0];
+                    string steamID64 = parts[0];
                     string dateStr = parts[1];
                     DateTime dt = DateTime.Now;
+
+                    SteamUser steamUser = simpleSteam.GetUserByID(steamID64);
+                    string user = steamUser.SteamID;
 
                     if (DateTime.TryParse(parts[1], out dt))
                     {
@@ -55,7 +62,7 @@ namespace InsurgencySandstormRcon
 
                     string reason = banEntry.Substring(reasonIndex, (banEntry.Length - reasonIndex));
 
-                    listBox1.Items.Add(string.Format("{0} on {1} | {2}", user, dateStr, reason));
+                    listBox1.Items.Add(string.Format("{0} {1} on {2} | {3}", steamID64, user, dateStr, reason));
                 }
             }
         }

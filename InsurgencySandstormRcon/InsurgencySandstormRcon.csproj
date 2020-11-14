@@ -129,6 +129,8 @@
     <Compile Include="Dialogs\ServerManagmentDialog.Designer.cs">
       <DependentUpon>ServerManagmentDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="SimpleSteam.cs" />
+    <Compile Include="SteamUser.cs" />
     <Compile Include="SuperSimpleRconLib.cs" />
     <EmbeddedResource Include="Dialogs\BanListDialog.resx">
       <DependentUpon>BanListDialog.cs</DependentUpon>
