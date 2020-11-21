@@ -15,6 +15,8 @@ namespace InsurgencySandstormRcon
         RconServer selectedServer;
         int selectedIndex = 0;
 
+        bool ignoreChanges = false;
+
         public ServerManagmentDialog()
         {
             InitializeComponent();
@@ -53,12 +55,14 @@ namespace InsurgencySandstormRcon
 
         protected void ClearFields()
         {
+            ignoreChanges = true;
             textBox1.Text = string.Empty;
             textBox2.Text = string.Empty;
             numericUpDown1.Value = 0;
             numericUpDown2.Value = 0;
             numericUpDown3.Value = 0;
             toggleablePasswordBox1.Text = string.Empty;
+            ignoreChanges = false;
         }
 
         protected void ServerListUpdated()
@@ -75,12 +79,14 @@ namespace InsurgencySandstormRcon
                 selectedServer = RconServerManager.Instance.Servers[index];
                 selectedIndex = index;
 
+                ignoreChanges = true;
                 textBox1.Text = selectedServer.Name;
                 textBox2.Text = selectedServer.Host;
                 numericUpDown1.Value = selectedServer.GamePort;
                 numericUpDown2.Value = selectedServer.QueryPort;
                 numericUpDown3.Value = selectedServer.RconPort;
                 toggleablePasswordBox1.Text = Security.DecryptPassword(selectedServer.RconPassword);
+                ignoreChanges = false;
             }
         }
 
@@ -127,7 +133,8 @@ namespace InsurgencySandstormRcon
             if (index >= 0)
             {
                 RconServerManager.Instance.Servers[index].Name = textBox1.Text;
-                RconServerManager.Instance.UnsavedChanges = true;
+                if (!ignoreChanges)
+                    RconServerManager.Instance.UnsavedChanges = true;
                 ServerListUpdated();
             }
         }
@@ -139,7 +146,8 @@ namespace InsurgencySandstormRcon
             if (index >= 0)
             {
                 RconServerManager.Instance.Servers[index].Host = textBox2.Text;
-                RconServerManager.Instance.UnsavedChanges = true;
+                if (!ignoreChanges)
+                    RconServerManager.Instance.UnsavedChanges = true;
                 ServerListUpdated();
             }
         }
@@ -151,7 +159,8 @@ namespace InsurgencySandstormRcon
             if (index >= 0)
             {
                 RconServerManager.Instance.Servers[index].GamePort = (int)numericUpDown1.Value;
-                RconServerManager.Instance.UnsavedChanges = true;
+                if(!ignoreChanges)
+                    RconServerManager.Instance.UnsavedChanges = true;
                 ServerListUpdated();
             }
         }
@@ -163,7 +172,8 @@ namespace InsurgencySandstormRcon
             if (index >= 0)
             {
                 RconServerManager.Instance.Servers[index].QueryPort = (int)numericUpDown2.Value;
-                RconServerManager.Instance.UnsavedChanges = true;
+                if (!ignoreChanges)
+                    RconServerManager.Instance.UnsavedChanges = true;
                 ServerListUpdated();
             }
         }
@@ -175,7 +185,8 @@ namespace InsurgencySandstormRcon
             if (index >= 0)
             {
                 RconServerManager.Instance.Servers[index].RconPort = (int)numericUpDown3.Value;
-                RconServerManager.Instance.UnsavedChanges = true;
+                if (!ignoreChanges)
+                    RconServerManager.Instance.UnsavedChanges = true;
                 ServerListUpdated();
             }
         }
@@ -187,7 +198,8 @@ namespace InsurgencySandstormRcon
             if (index > 0)
             {
                 RconServerManager.Instance.Servers[index].RconPassword = Security.EncryptPassword(toggleablePasswordBox1.Text);
-                RconServerManager.Instance.UnsavedChanges = true;
+                if (!ignoreChanges)
+                    RconServerManager.Instance.UnsavedChanges = true;
             }
         }
     }
