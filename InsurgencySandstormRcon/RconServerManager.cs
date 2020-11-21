@@ -17,7 +17,9 @@ namespace InsurgencySandstormRcon
         static RconServerManager instance;
         public static RconServerManager Instance
         {
-            get { if (instance == null)
+            get
+            {
+                if (instance == null)
                     instance = new RconServerManager();
                 return instance;
             }
@@ -38,10 +40,18 @@ namespace InsurgencySandstormRcon
             set { activeServer = value; }
         }
 
+        bool unsavedChanges = false;
+        public bool UnsavedChanges
+        {
+            get { return unsavedChanges; }
+            set { unsavedChanges = value; }
+        }
+
         public RconServerManager()
         {
             instance = this;
             servers = new RconServerCollection();
+            previouslySavedServers = servers;
 
             rconDataFilePath = Path.Combine(Application.UserAppDataPath, "RconServers.json");
         }

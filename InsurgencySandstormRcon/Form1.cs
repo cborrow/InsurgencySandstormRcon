@@ -215,6 +215,15 @@ namespace InsurgencySandstormRcon
 
         protected override void OnClosing(CancelEventArgs e)
         {
+            if(RconServerManager.Instance.UnsavedChanges)
+            {
+                DialogResult dr = MessageBox.Show("There are unsaved changes in your server list. Do you wish to save these before exiting?", "Unsaved changes", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            
+                if(dr == DialogResult.Yes)
+                {
+                    RconServerManager.Instance.Save();
+                }
+            }
             base.OnClosing(e);
         }
 
