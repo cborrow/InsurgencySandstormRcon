@@ -75,6 +75,7 @@ namespace InsurgencySandstormRcon
             string data = JsonConvert.SerializeObject(servers);
             File.WriteAllText(rconDataFilePath, data);
             previouslySavedServers = servers;
+            unsavedChanges = false;
         }
 
         public void RevertUnsavedChanges()
