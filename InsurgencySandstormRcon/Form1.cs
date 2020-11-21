@@ -192,15 +192,9 @@ namespace InsurgencySandstormRcon
 
         public void ReloadServers()
         {
-            for (int i = 0; i < toolStripDropDownButton1.DropDownItems.Count; i++)
-            {
-                if (i == 0 || i == 1)
-                    continue;
-                else
-                {
-                    toolStripDropDownButton1.DropDownItems.RemoveAt(i);
-                }
-            }
+            toolStripDropDownButton1.DropDownItems.Clear();
+            toolStripDropDownButton1.DropDownItems.Add(manageConnectionsToolStripMenuItem);
+            toolStripDropDownButton1.DropDownItems.Add(toolStripSeparator1);
 
             foreach (RconServer server in rconManager.Servers)
             {
@@ -221,7 +215,6 @@ namespace InsurgencySandstormRcon
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            rconManager.Save();
             base.OnClosing(e);
         }
 
@@ -316,11 +309,13 @@ namespace InsurgencySandstormRcon
 
         private void manageConnectionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(serverManagmentDialog.ShowDialog() == DialogResult.OK)
+            if (serverManagmentDialog.ShowDialog() == DialogResult.OK)
             {
                 UnselectAllServers();
                 ReloadServers();
             }
+            else
+                RconServerManager.Instance.RevertUnsavedChanges();
         }
 
         private void button3_Click(object sender, EventArgs e)

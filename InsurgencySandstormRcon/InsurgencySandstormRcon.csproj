@@ -12,6 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -24,7 +25,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -68,6 +68,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ToggleablePasswordBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ToggleablePasswordBox.Designer.cs">
+      <DependentUpon>ToggleablePasswordBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\BanListDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +138,9 @@
     <Compile Include="SimpleSteam.cs" />
     <Compile Include="SteamUser.cs" />
     <Compile Include="SuperSimpleRconLib.cs" />
+    <EmbeddedResource Include="Controls\ToggleablePasswordBox.resx">
+      <DependentUpon>ToggleablePasswordBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\BanListDialog.resx">
       <DependentUpon>BanListDialog.cs</DependentUpon>
     </EmbeddedResource>

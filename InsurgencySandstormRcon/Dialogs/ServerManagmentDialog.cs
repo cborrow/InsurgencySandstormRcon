@@ -21,6 +21,8 @@ namespace InsurgencySandstormRcon
         {
             InitializeComponent();
 
+            toggleablePasswordBox1.TextChanged += ToggleablePasswordBox1_TextChanged;
+
             passwordUpdatedTimer = new Timer();
             passwordUpdatedTimer.Interval = 500;
             passwordUpdatedTimer.Tick += PasswordUpdatedTimer_Tick;
@@ -29,8 +31,16 @@ namespace InsurgencySandstormRcon
         protected override void OnLoad(EventArgs e)
         {
             ClearFields();
-            listBox1.DataSource = RconServerManager.Instance.Servers;
+            ServerListUpdated();
+
             base.OnLoad(e);
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            listBox1.SelectedIndex = -1;
+            ClearFields();
+            base.OnClosing(e);
         }
 
         protected RconServer GetSelectedServer()
@@ -54,6 +64,7 @@ namespace InsurgencySandstormRcon
             numericUpDown1.Value = 0;
             numericUpDown2.Value = 0;
             numericUpDown3.Value = 0;
+            toggleablePasswordBox1.Text = string.Empty;
         }
 
         protected void ServerListUpdated()
@@ -64,7 +75,7 @@ namespace InsurgencySandstormRcon
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listBox1.SelectedItem != null)
+            if (listBox1.SelectedIndex >= 0)
             {
                 int index = GetSelectedServerIndex();
                 selectedServer = RconServerManager.Instance.Servers[index];
@@ -75,6 +86,7 @@ namespace InsurgencySandstormRcon
                 numericUpDown1.Value = selectedServer.GamePort;
                 numericUpDown2.Value = selectedServer.QueryPort;
                 numericUpDown3.Value = selectedServer.RconPort;
+                toggleablePasswordBox1.Text = Security.DecryptPassword(selectedServer.RconPassword);
             }
         }
 
@@ -83,22 +95,12 @@ namespace InsurgencySandstormRcon
             RconServerManager.Instance.Save();
             listBox1.SelectedIndex = -1;
             DialogResult = DialogResult.OK;
-            this.Close();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            selectedIndex = -1;
-            selectedServer = null;
-            textBox1.Text = string.Empty;
-            textBox2.Text = string.Empty;
-            numericUpDown1.Value = 0;
-            numericUpDown2.Value = 0;
-            numericUpDown3.Value = 0;
-            textBox6.Text = string.Empty;
-
+            listBox1.SelectedIndex = -1;
             DialogResult = DialogResult.Cancel;
-            this.Close();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -107,7 +109,6 @@ namespace InsurgencySandstormRcon
             {
                 int index = GetSelectedServerIndex();
                 RconServerManager.Instance.Servers.RemoveAt(index);
-                RconServerManager.Instance.Save();
                 ServerListUpdated();
             }
         }
@@ -181,7 +182,28 @@ namespace InsurgencySandstormRcon
 
         private void PasswordUpdatedTimer_Tick(object sender, EventArgs e)
         {
-            
+            passwordUpdatedTimer.Stop();
+            int index = GetSelectedServerIndex();
+
+            if(index > 0)
+            {
+                RconServerManager.Instance.Servers[index].RconPassword = Security.EncryptPassword(toggleablePasswordBox1.Text);
+            }
+        }
+
+        private void ToggleablePasswordBox1_TextChanged(object sender, EventArgs e)
+        {
+            /*if(passwordUpdatedTimer.Enabled)
+                passwordUpdatedTimer.Stop();
+
+            passwordUpdatedTimer.Start();*/
+
+            int index = GetSelectedServerIndex();
+
+            if (index > 0)
+            {
+                RconServerManager.Instance.Servers[index].RconPassword = Security.EncryptPassword(toggleablePasswordBox1.Text);
+            }
         }
     }
 }

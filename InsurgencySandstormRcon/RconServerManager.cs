@@ -23,6 +23,7 @@ namespace InsurgencySandstormRcon
             }
         }
 
+        RconServerCollection previouslySavedServers;
         RconServerCollection servers;
         public RconServerCollection Servers
         {
@@ -56,12 +57,19 @@ namespace InsurgencySandstormRcon
             string data = File.ReadAllText(rconDataFilePath);
             RconServer[] rconServers = JsonConvert.DeserializeObject<RconServer[]>(data);
             servers.AddRange(rconServers);
+            previouslySavedServers = servers;
         }
 
         public void Save()
         {
             string data = JsonConvert.SerializeObject(servers);
             File.WriteAllText(rconDataFilePath, data);
+            previouslySavedServers = servers;
+        }
+
+        public void RevertUnsavedChanges()
+        {
+            servers = previouslySavedServers;
         }
     }
 }
